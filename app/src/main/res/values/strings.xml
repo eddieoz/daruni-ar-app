@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Daruni-Beta</string>
+    <string name="app_description">Catalogo do site TerceiraIdade.com em 3D com Realidade Aumentada</string>
+    <string name="button_start">Iniciar</string>
+    
+    <string name="menu_back">Sobre</string>
+    <string name="menu_extended_tracking">Tracking extendido</string>
+    <string name="menu_character_mode">Modo de caracter</string>
+    <string name="menu_flash">Flash</string>
+    <string name="menu_flash_error_on">Não é possível ligar o flash</string>
+    <string name="menu_flash_error_off">Não é possível desligar o flash</string>
+    <string name="menu_contAutofocus">Autofocus</string>
+    <string name="menu_contAutofocus_error_on">Impossível ativar Auto-Focus Contínuo</string>
+    <string name="menu_contAutofocus_error_off">Impossível desativar Auto-Focus Contínuo</string>
+    <string name="menu_datasets">PRODUTOS</string>
+    <string name="menu_camera">CAMERA</string>
+    <string name="menu_camera_front">Front</string>
+    <string name="menu_camera_back">Rear</string>
+    <string name="menu_button_red">Red</string>
+    <string name="menu_button_blue">Blue</string>
+    <string name="menu_button_yellow">Yellow</string>
+    <string name="menu_button_green">Green</string>
+        
+    <string name="splash_screen_description">Daruni Splash</string>
+    <string name="menu_desc">Descrições</string>
+
+    <string name="button_right">Direita</string>
+    <string name="button_left">Esquerda</string>
+    
+</resources>

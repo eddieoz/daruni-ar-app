@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/osoriojr/Projects/AndroidstudioProjects/DaruniApp-Beta/app/src/main/Vuforia.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="65d210365ebcbcb3c5b93b6db0ca4126f6bcf46d">
+        <dex dex="/Users/osoriojr/Projects/AndroidstudioProjects/DaruniApp-Beta/app/build/intermediates/pre-dexed/debug/Vuforia-3176b77b68e860fd5db19f5bf08ccb52df799b26.jar" />
+    </item>
+
+</items>

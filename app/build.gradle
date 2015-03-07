@@ -1,0 +1,36 @@
+apply plugin: 'com.android.application'
+android {
+    compileSdkVersion 18
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        applicationId "com.daruni.QCAR.ImageTargets"
+        minSdkVersion 9
+        targetSdkVersion 18
+
+
+
+        /* NDK não compila nativamente. é necessário desabilitar , ignorar o dir com os .cpp e redirecionar as libs de jniLibs para libs.
+        A compilação com o ndk tem que ocorrer normalmente pelo Shell
+
+        ndk {
+            moduleName "Vuforia-prebuilt"
+        }*/
+        sourceSets.main {
+            jni.srcDirs = []
+            jniLibs.srcDir 'src/main/libs'
+        }
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile files('src/main/Vuforia.jar')
+}

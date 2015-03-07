@@ -1,0 +1,2 @@
+/Users/osoriojr/Projects/AndroidstudioProjects/DaruniApp-Beta/app/build/intermediates/classes/debug
+/Users/osoriojr/Projects/AndroidstudioProjects/DaruniApp-Beta/app/build/intermediates/pre-dexed/debug/Vuforia-3176b77b68e860fd5db19f5bf08ccb52df799b26.jar
