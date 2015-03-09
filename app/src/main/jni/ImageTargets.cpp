@@ -36,6 +36,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #include "Buildings.h"
 //#include "mbcr1953lqc.h"
 #include "mbcr1953lqc.h"
+#include "mba012.h"
 //#include "mbcr1953-2.h"
 //#include "mbcr1953_desc.h"
 
@@ -78,8 +79,9 @@ QCAR::Matrix44F projectionMatrix;
 static const float kObjectScale = 3.5f;
 static const float kBuildingsObjectScale = 6.f;
 
-QCAR::DataSet* dataSetMbcr1953lqc           = 0;
-QCAR::DataSet* dataSetTeapot    = 0;
+QCAR::DataSet* dataSetMbcr1953lqc   = 0;
+QCAR::DataSet* dataSetTeapot        = 0;
+QCAR::DataSet* dataSetMba012        = 0;
 
 
 bool switchDataSetAsap            = false;
@@ -90,6 +92,7 @@ QCAR::CameraDevice::CAMERA currentCamera;
 
 const int MBCR1953LQC_DATASET_ID = 0;
 const int TEAPOT_DATASET_ID = 1;
+const int MBA012_DATASET_ID = 2;
 
 //int selectedDataset = TEAPOT_DATASET_ID;
 int selectedDataset = MBCR1953LQC_DATASET_ID;
@@ -106,7 +109,7 @@ class ImageTargets_UpdateCallback : public QCAR::UpdateCallback
             QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
             QCAR::ImageTracker* imageTracker = static_cast<QCAR::ImageTracker*>(
                 trackerManager.getTracker(QCAR::ImageTracker::getClassType()));
-            if (imageTracker == 0 || dataSetTeapot == 0 || dataSetMbcr1953lqc == 0 ||
+            if (imageTracker == 0 || dataSetTeapot == 0 || dataSetMbcr1953lqc == 0 || dataSetMba012 == 0 ||
                 imageTracker->getActiveDataSet() == 0)
             {
                 LOG("Failed to switch data set.");
@@ -120,6 +123,16 @@ class ImageTargets_UpdateCallback : public QCAR::UpdateCallback
 					{
 						imageTracker->activateDataSet(dataSetMbcr1953lqc);
 						imageTracker->deactivateDataSet(dataSetTeapot);
+						imageTracker->deactivateDataSet(dataSetMba012);
+
+					}
+					break;
+				case MBA012_DATASET_ID:
+					if (imageTracker->getActiveDataSet() != dataSetMba012)
+					{
+						imageTracker->activateDataSet(dataSetMba012);
+						imageTracker->deactivateDataSet(dataSetTeapot);
+						imageTracker->deactivateDataSet(dataSetMbcr1953lqc);
 
 					}
 					break;
@@ -128,6 +141,7 @@ class ImageTargets_UpdateCallback : public QCAR::UpdateCallback
 					{
 						imageTracker->activateDataSet(dataSetTeapot);
 						imageTracker->deactivateDataSet(dataSetMbcr1953lqc);
+						imageTracker->deactivateDataSet(dataSetMba012);
 					}
 					break;
 					
@@ -215,11 +229,18 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargets_loadTrackerData(JNIEnv *, jobject
 
     // Create the data sets:
     dataSetMbcr1953lqc = imageTracker->createDataSet();
-        if (dataSetMbcr1953lqc == 0)
-        {
-                LOG("Failed to create a new tracking data.");
-                return 0;
-        }
+    if (dataSetMbcr1953lqc == 0)
+    {
+        LOG("Failed to create a new tracking data.");
+        return 0;
+    }
+    // Create the data sets:
+    dataSetMba012 = imageTracker->createDataSet();
+    if (dataSetMba012 == 0)
+    {
+        LOG("Failed to create a new tracking data.");
+        return 0;
+    }
 
     dataSetTeapot = imageTracker->createDataSet();
     if (dataSetTeapot == 0)
@@ -232,6 +253,12 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargets_loadTrackerData(JNIEnv *, jobject
 
     // Load the data sets:
     if (!dataSetMbcr1953lqc->load("Daruni.xml", QCAR::STORAGE_APPRESOURCE))
+    {
+         LOG("Failed to load data set.");
+         return 0;
+    }
+    // Load the data sets:
+    if (!dataSetMba012->load("Daruni.xml", QCAR::STORAGE_APPRESOURCE))
     {
          LOG("Failed to load data set.");
          return 0;
@@ -313,6 +340,25 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargets_destroyTrackerData(JNIEnv *, jobj
             LOG("Successfully destroyed the data set Tarmac.");
             dataSetMbcr1953lqc = 0;
         }
+        if (dataSetMba012 != 0)
+        {
+            if (imageTracker->getActiveDataSet() == dataSetMba012 &&
+                !imageTracker->deactivateDataSet(dataSetMba012))
+            {
+                LOG("Failed to destroy the tracking data set Tarmac because the data set "
+                    "could not be deactivated.");
+                return 0;
+            }
+
+            if (!imageTracker->destroyDataSet(dataSetMba012))
+            {
+                LOG("Failed to destroy the tracking data set Tarmac.");
+                return 0;
+            }
+
+            LOG("Successfully destroyed the data set Tarmac.");
+            dataSetMba012 = 0;
+        }
     return 1;
 }
 
@@ -389,11 +435,14 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargetsRenderer_renderFrame(JNIEnv *, job
 			else if (strcmp(trackable.getName(), "darunitargetingstones") == 0)
 			{
 				if (imageTracker->getActiveDataSet() == dataSetTeapot ){
-					textureIndex = 5;
+					textureIndex = 3;
 				}
 				if (imageTracker->getActiveDataSet() == dataSetMbcr1953lqc ){
 					textureIndex = 0;
 				}
+				if (imageTracker->getActiveDataSet() == dataSetMba012 ){
+                	textureIndex = 2;
+                }
 			}
 			else
 			{
@@ -492,6 +541,55 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargetsRenderer_renderFrame(JNIEnv *, job
 
 
 			}
+
+			if (imageTracker->getActiveDataSet() == dataSetMba012 ){
+
+            	glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0,
+            							(const GLvoid*) &mba012Vertices[0]);
+            	glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0,
+            							(const GLvoid*) &mba012Normals[0]);
+            	glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0,
+            							(const GLvoid*) &mba012TexCoords[0]);
+            	glEnableVertexAttribArray(vertexHandle);
+            	glEnableVertexAttribArray(normalHandle);
+            	glEnableVertexAttribArray(textureCoordHandle);
+
+
+            	glActiveTexture(GL_TEXTURE0);
+            	glBindTexture(GL_TEXTURE_2D, thisTexture->mTextureID);
+            	glUniform1i(texSampler2DHandle, 0 );
+            	glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE,
+            					(GLfloat*)&modelViewProjection.data[0] );
+
+  				glDrawElements(GL_TRIANGLES, NUM_MBA012_OBJECT_INDEX, GL_UNSIGNED_SHORT,
+            				(const GLvoid*) &mba012Indices[0]);
+
+
+            	/*if ( isDescActivated ){
+
+            		const Texture* const thisTexture = textures[1];
+
+            		glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0,
+            					(const GLvoid*) &mbcr1953lqc_descVertices[0]);
+            		glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0,
+            					(const GLvoid*) &mbcr1953lqc_descNormals[0]);
+            		glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0,
+            					(const GLvoid*) &mbcr1953lqc_descTexCoords[0]);
+            		glEnableVertexAttribArray(vertexHandle);
+            		glEnableVertexAttribArray(normalHandle);
+            		glEnableVertexAttribArray(textureCoordHandle);
+
+            		glActiveTexture(GL_TEXTURE0);
+            		glBindTexture(GL_TEXTURE_2D, thisTexture->mTextureID);
+            		glUniform1i(texSampler2DHandle, 0 );
+            		glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE,
+            				(GLfloat*)&modelViewProjection.data[0] );
+
+            		glDrawElements(GL_TRIANGLES, NUM_MBCR1953LQC_DESC_OBJECT_INDEX, GL_UNSIGNED_SHORT,
+            				(const GLvoid*) &mbcr1953lqc_descIndices[0]);
+
+            	}*/
+            }
 
 			/* glEnableVertexAttribArray(vertexHandle);
 			glEnableVertexAttribArray(normalHandle);
