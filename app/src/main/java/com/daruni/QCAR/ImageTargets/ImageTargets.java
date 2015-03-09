@@ -364,6 +364,14 @@ public class ImageTargets extends Activity implements SampleAppMenuInterface
                 getAssets()));
     	mTextures.add(Texture.loadTextureFromApk("desc_yellow.png",
                 getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("mba012_texture.png",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("TextureTeapotBlue.png",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("TextureTeapotRed.png",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("TextureTeapotBrass.png",
+                getAssets()));
     }
     
     
@@ -897,10 +905,12 @@ public class ImageTargets extends Activity implements SampleAppMenuInterface
     final static int CMD_DESC = 6;
     final static int CMD_DATASET_MBCR1953LQC_DATASET = 7;
     final static int CMD_DATASET_TEAPOT_DATASET = 8;
+    final static int CMD_DATASET_MBA012_DATASET = 9;
     
     
     final static int MBCR1953LQC_DATASET_ID = 0;
     final static int TEAPOT_DATASET_ID = 1;
+    final static int MBA012_DATASET_ID = 2;
     
     
     final static int CAMERA_DEFAULT = 0;
@@ -956,7 +966,8 @@ public class ImageTargets extends Activity implements SampleAppMenuInterface
         group = mSampleAppMenu
             .addGroup(getString(R.string.menu_datasets), true);
         group.addRadioItem("MBCR1953LQC", CMD_DATASET_MBCR1953LQC_DATASET, true);
-        //group.addRadioItem("Pote de Cha", CMD_DATASET_TEAPOT_DATASET, false);
+        group.addRadioItem("MBA012", CMD_DATASET_MBA012_DATASET, true);
+        group.addRadioItem("Pote de Cha", CMD_DATASET_TEAPOT_DATASET, false);
         
         
         mSampleAppMenu.attachMenu();
@@ -1107,6 +1118,11 @@ public class ImageTargets extends Activity implements SampleAppMenuInterface
             case CMD_DATASET_MBCR1953LQC_DATASET:
             	lastProduct = MBCR1953LQC_DATASET_ID;
                 switchDatasetAsap(MBCR1953LQC_DATASET_ID);
+                break;
+
+            case CMD_DATASET_MBA012_DATASET:
+                lastProduct = MBA012_DATASET_ID;
+                switchDatasetAsap(MBA012_DATASET_ID);
                 break;
             
             case CMD_DATASET_TEAPOT_DATASET:
