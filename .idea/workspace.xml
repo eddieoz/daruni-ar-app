@@ -21,7 +21,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="278fa908-8b69-45db-a9a0-01f6b06f6a9b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/model_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/model_data.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="DaruniApp-Beta.iws" />
     <ignored path=".idea/workspace.xml" />
