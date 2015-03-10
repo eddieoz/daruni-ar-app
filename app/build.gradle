@@ -31,6 +31,7 @@ android {
     }
 }
 
+/* É necessário copiar a lib Vuforia.jar e colocar como dependência */
 dependencies {
     compile files('src/main/Vuforia.jar')
 }

@@ -966,7 +966,7 @@ public class ImageTargets extends Activity implements SampleAppMenuInterface
         group = mSampleAppMenu
             .addGroup(getString(R.string.menu_datasets), true);
         group.addRadioItem("MBCR1953LQC", CMD_DATASET_MBCR1953LQC_DATASET, true);
-        group.addRadioItem("MBA012", CMD_DATASET_MBA012_DATASET, true);
+        group.addRadioItem("MBA012", CMD_DATASET_MBA012_DATASET, false);
         group.addRadioItem("Pote de Cha", CMD_DATASET_TEAPOT_DATASET, false);
         
         
