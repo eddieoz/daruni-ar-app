@@ -35,7 +35,8 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #include "Teapot.h"
 #include "Buildings.h"
 //#include "mbcr1953lqc.h"
-#include "mbcr1953lqc.h"
+//#include "mbcr1953lqc.h"
+#include "mbcr1953lqc_2.h"
 #include "mba012.h"
 //#include "mbcr1953-2.h"
 //#include "mbcr1953_desc.h"
@@ -490,11 +491,11 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargetsRenderer_renderFrame(JNIEnv *, job
 			if (imageTracker->getActiveDataSet() == dataSetMbcr1953lqc ){
 
 				glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0,
-								  (const GLvoid*) &polySurface519Vertices[0]);
+								  (const GLvoid*) &polySurface519_001Vertices[0]);
 				glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0,
-								  (const GLvoid*) &polySurface519Normals[0]);
+								  (const GLvoid*) &polySurface519_001Normals[0]);
 				glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0,
-								  (const GLvoid*) &polySurface519TexCoords[0]);
+								  (const GLvoid*) &polySurface519_001TexCoords[0]);
 				glEnableVertexAttribArray(vertexHandle);
 				glEnableVertexAttribArray(normalHandle);
 				glEnableVertexAttribArray(textureCoordHandle);
@@ -506,8 +507,8 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargetsRenderer_renderFrame(JNIEnv *, job
 				glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE,
 								(GLfloat*)&modelViewProjection.data[0] );
 
-				glDrawElements(GL_TRIANGLES, NUM_POLYSURFACE519_OBJECT_INDEX, GL_UNSIGNED_SHORT,
-							(const GLvoid*) &polySurface519Indices[0]);
+				glDrawElements(GL_TRIANGLES, NUM_POLYSURFACE519_001_OBJECT_INDEX, GL_UNSIGNED_SHORT,
+							(const GLvoid*) &polySurface519_001Indices[0]);
 
 
 				if ( isDescActivated ){
@@ -570,11 +571,11 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargetsRenderer_renderFrame(JNIEnv *, job
             		const Texture* const thisTexture = textures[1];
 
             		glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0,
-            					(const GLvoid*) &mbcr1953lqc_descVertices[0]);
+            					(const GLvoid*) &mba012_descVertices[0]);
             		glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0,
-            					(const GLvoid*) &mbcr1953lqc_descNormals[0]);
+            					(const GLvoid*) &mba012_descNormals[0]);
             		glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0,
-            					(const GLvoid*) &mbcr1953lqc_descTexCoords[0]);
+            					(const GLvoid*) &mba012_descTexCoords[0]);
             		glEnableVertexAttribArray(vertexHandle);
             		glEnableVertexAttribArray(normalHandle);
             		glEnableVertexAttribArray(textureCoordHandle);
@@ -585,8 +586,8 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargetsRenderer_renderFrame(JNIEnv *, job
             		glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE,
             				(GLfloat*)&modelViewProjection.data[0] );
 
-            		glDrawElements(GL_TRIANGLES, NUM_MBCR1953LQC_DESC_OBJECT_INDEX, GL_UNSIGNED_SHORT,
-            				(const GLvoid*) &mbcr1953lqc_descIndices[0]);
+            		glDrawElements(GL_TRIANGLES, NUM_MBA012_DESC_OBJECT_INDEX, GL_UNSIGNED_SHORT,
+            				(const GLvoid*) &mba012_descIndices[0]);
 
             	}*/
             }
