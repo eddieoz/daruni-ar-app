@@ -47,7 +47,7 @@ obj/local/armeabi-v7a/objs/ImageTargetsNative/ImageTargets.o: \
  /Users/osoriojr/Library/Android/vuforia/build/include/QCAR/UpdateCallback.h \
  /Users/osoriojr/Library/Android/vuforia/build/include/QCAR/DataSet.h \
  jni/SampleUtils.h jni/Texture.h jni/CubeShaders.h jni/Teapot.h \
- jni/Buildings.h jni/mbcr1953lqc.h jni/mba012.h
+ jni/Buildings.h jni/mbcr1953lqc_2.h jni/mba012.h
 
 /Users/osoriojr/Library/Android/ndk/platforms/android-8/arch-arm/usr/include/jni.h:
 
@@ -151,6 +151,6 @@ jni/Teapot.h:
 
 jni/Buildings.h:
 
-jni/mbcr1953lqc.h:
+jni/mbcr1953lqc_2.h:
 
 jni/mba012.h:

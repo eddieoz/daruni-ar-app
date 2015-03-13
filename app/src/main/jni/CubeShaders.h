@@ -38,7 +38,7 @@ uniform sampler2D texSampler2D; \
 \
 void main()  { \
    vec3 n = normalize(normal.xyz); \
-   vec3 lightDir = vec3(0.0, 0.0, -1.0); \
+   vec3 lightDir = vec3(-0.3, -0.3, -1.0); \
    vec3 ambient = vec3(0, 0, 0); \
    vec3 diffuseLight = vec3(1.2, 1.2, 1.2); \
    float diffuseFactor = max(0.0, dot(n, lightDir)); \

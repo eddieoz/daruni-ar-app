@@ -47,21 +47,25 @@ public final class R {
         public static final int button_start=0x7f080001;
         public static final int camera_overlay_layout=0x7f080003;
         public static final int loading_indicator=0x7f080004;
-        public static final int logo_image=0x7f08000a;
-        public static final int menu_group_title=0x7f080005;
-        public static final int menu_group_title_divider=0x7f080006;
-        public static final int settings_menu=0x7f080007;
-        public static final int settings_menu_title=0x7f080008;
-        public static final int splash_image=0x7f080009;
+        public static final int logo_image=0x7f08000d;
+        public static final int mba012Textura1=0x7f080005;
+        public static final int mba012Textura2=0x7f080006;
+        public static final int mba012Textura3=0x7f080007;
+        public static final int menu_group_title=0x7f080008;
+        public static final int menu_group_title_divider=0x7f080009;
+        public static final int settings_menu=0x7f08000a;
+        public static final int settings_menu_title=0x7f08000b;
+        public static final int splash_image=0x7f08000c;
     }
     public static final class layout {
         public static final int about_screen=0x7f030000;
         public static final int camera_overlay=0x7f030001;
-        public static final int sample_app_menu_group=0x7f030002;
-        public static final int sample_app_menu_group_divider=0x7f030003;
-        public static final int sample_app_menu_group_radio_button=0x7f030004;
-        public static final int sample_app_menu_layer=0x7f030005;
-        public static final int splash_screen=0x7f030006;
+        public static final int mba012_overlay=0x7f030002;
+        public static final int sample_app_menu_group=0x7f030003;
+        public static final int sample_app_menu_group_divider=0x7f030004;
+        public static final int sample_app_menu_group_radio_button=0x7f030005;
+        public static final int sample_app_menu_layer=0x7f030006;
+        public static final int splash_screen=0x7f030007;
     }
     public static final class string {
         public static final int app_description=0x7f060000;
