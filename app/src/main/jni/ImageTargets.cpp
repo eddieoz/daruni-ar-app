@@ -566,7 +566,7 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargetsRenderer_renderFrame(JNIEnv *, job
             				(const GLvoid*) &mba012Indices[0]);
 
 
-            	/*if ( isDescActivated ){
+            	if ( isDescActivated ){
 
             		const Texture* const thisTexture = textures[1];
 
@@ -589,7 +589,7 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargetsRenderer_renderFrame(JNIEnv *, job
             		glDrawElements(GL_TRIANGLES, NUM_MBA012_DESC_OBJECT_INDEX, GL_UNSIGNED_SHORT,
             				(const GLvoid*) &mba012_descIndices[0]);
 
-            	}*/
+            	}
             }
 
 			/* glEnableVertexAttribArray(vertexHandle);
