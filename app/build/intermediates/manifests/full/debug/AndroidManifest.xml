@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.daruni.QCAR.ImageTargets"
-    android:versionCode="200"
+    android:versionCode="201"
     android:versionName="3.0" >
     <!--
         The application's compatibility with one or more versions of the Android

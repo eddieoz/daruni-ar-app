@@ -890,6 +890,13 @@ public class ImageTargets extends Activity implements SampleAppMenuInterface
                 startActivity(launchBrowser);
             	
         	}
+
+            if ( lastProduct == MBA012_DATASET_ID ){
+                Uri uriUrl = Uri.parse("http://www.terceiraidade.com/cadeira-de-banho-com-encosto-mobil-saude.html?utm_source=daruni_app&utm_medium=app&utm_content=mba012&utm_campaign=Daruni%20App");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+
+            }
         	
         	return true;
         }
@@ -965,9 +972,9 @@ public class ImageTargets extends Activity implements SampleAppMenuInterface
         
         group = mSampleAppMenu
             .addGroup(getString(R.string.menu_datasets), true);
-        group.addRadioItem("MBCR1953LQC", CMD_DATASET_MBCR1953LQC_DATASET, true);
-        group.addRadioItem("MBA012", CMD_DATASET_MBA012_DATASET, false);
-        group.addRadioItem("Pote de Cha", CMD_DATASET_TEAPOT_DATASET, false);
+        group.addRadioItem("Cadeira de Rodas MBCR1953LQC", CMD_DATASET_MBCR1953LQC_DATASET, true);
+        group.addRadioItem("Cadeira de Banho MBA012", CMD_DATASET_MBA012_DATASET, false);
+        //group.addRadioItem("Pote de Cha", CMD_DATASET_TEAPOT_DATASET, false);
         
         
         mSampleAppMenu.attachMenu();
