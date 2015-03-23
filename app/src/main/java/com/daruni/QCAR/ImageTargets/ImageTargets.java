@@ -724,7 +724,7 @@ public class ImageTargets extends Activity implements SampleAppMenuInterface
                 
                 if( mSampleAppMenu == null)
                 {
-                    mSampleAppMenu = new SampleAppMenu(this, this, "Image Targets",
+                    mSampleAppMenu = new SampleAppMenu(this, this, "Daruni Healthcare",
                         mGlView, mUILayout, null);
                     setSampleAppMenuSettings();
                 }
