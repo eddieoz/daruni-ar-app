@@ -38,6 +38,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 //#include "mbcr1953lqc.h"
 #include "mbcr1953lqc_2.h"
 #include "mba012.h"
+#include "mlm007.h"
 //#include "mbcr1953-2.h"
 //#include "mbcr1953_desc.h"
 
@@ -62,8 +63,8 @@ GLint normalHandle              = 0;
 GLint textureCoordHandle        = 0;
 GLint mvpMatrixHandle           = 0;
 GLint texSampler2DHandle        = 0;
-GLint modelViewMatrixHandle = 0;
-GLint diffuseMaterialHandle = 0;
+GLint modelViewMatrixHandle     = 0;
+GLint diffuseMaterialHandle     = 0;
 
 // Screen dimensions:
 unsigned int screenWidth        = 0;
@@ -83,6 +84,7 @@ static const float kBuildingsObjectScale = 6.f;
 QCAR::DataSet* dataSetMbcr1953lqc   = 0;
 QCAR::DataSet* dataSetTeapot        = 0;
 QCAR::DataSet* dataSetMba012        = 0;
+QCAR::DataSet* dataSetMlm007        = 0;
 
 
 bool switchDataSetAsap            = false;
@@ -94,6 +96,7 @@ QCAR::CameraDevice::CAMERA currentCamera;
 const int MBCR1953LQC_DATASET_ID = 0;
 const int TEAPOT_DATASET_ID = 1;
 const int MBA012_DATASET_ID = 2;
+const int MLM007_DATASET_ID = 3;
 
 //int selectedDataset = TEAPOT_DATASET_ID;
 int selectedDataset = MBCR1953LQC_DATASET_ID;
@@ -110,7 +113,7 @@ class ImageTargets_UpdateCallback : public QCAR::UpdateCallback
             QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
             QCAR::ImageTracker* imageTracker = static_cast<QCAR::ImageTracker*>(
                 trackerManager.getTracker(QCAR::ImageTracker::getClassType()));
-            if (imageTracker == 0 || dataSetTeapot == 0 || dataSetMbcr1953lqc == 0 || dataSetMba012 == 0 ||
+            if (imageTracker == 0 || dataSetTeapot == 0 || dataSetMbcr1953lqc == 0 || dataSetMba012 == 0 || dataSetMlm007 == 0 ||
                 imageTracker->getActiveDataSet() == 0)
             {
                 LOG("Failed to switch data set.");
@@ -125,6 +128,7 @@ class ImageTargets_UpdateCallback : public QCAR::UpdateCallback
 						imageTracker->activateDataSet(dataSetMbcr1953lqc);
 						imageTracker->deactivateDataSet(dataSetTeapot);
 						imageTracker->deactivateDataSet(dataSetMba012);
+						imageTracker->deactivateDataSet(dataSetMlm007);
 
 					}
 					break;
@@ -134,6 +138,17 @@ class ImageTargets_UpdateCallback : public QCAR::UpdateCallback
 						imageTracker->activateDataSet(dataSetMba012);
 						imageTracker->deactivateDataSet(dataSetTeapot);
 						imageTracker->deactivateDataSet(dataSetMbcr1953lqc);
+						imageTracker->deactivateDataSet(dataSetMlm007);
+
+					}
+					break;
+                case MLM007_DATASET_ID:
+					if (imageTracker->getActiveDataSet() != dataSetMlm007)
+					{
+						imageTracker->activateDataSet(dataSetMlm007);
+						imageTracker->deactivateDataSet(dataSetTeapot);
+						imageTracker->deactivateDataSet(dataSetMbcr1953lqc);
+						imageTracker->deactivateDataSet(dataSetMba012);
 
 					}
 					break;
@@ -143,6 +158,7 @@ class ImageTargets_UpdateCallback : public QCAR::UpdateCallback
 						imageTracker->activateDataSet(dataSetTeapot);
 						imageTracker->deactivateDataSet(dataSetMbcr1953lqc);
 						imageTracker->deactivateDataSet(dataSetMba012);
+						imageTracker->deactivateDataSet(dataSetMlm007);
 					}
 					break;
 					
@@ -242,6 +258,12 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargets_loadTrackerData(JNIEnv *, jobject
         LOG("Failed to create a new tracking data.");
         return 0;
     }
+    dataSetMlm007 = imageTracker->createDataSet();
+    if (dataSetMlm007 == 0)
+    {
+        LOG("Failed to create a new tracking data.");
+        return 0;
+    }
 
     dataSetTeapot = imageTracker->createDataSet();
     if (dataSetTeapot == 0)
@@ -260,6 +282,11 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargets_loadTrackerData(JNIEnv *, jobject
     }
     // Load the data sets:
     if (!dataSetMba012->load("Daruni.xml", QCAR::STORAGE_APPRESOURCE))
+    {
+         LOG("Failed to load data set.");
+         return 0;
+    }
+    if (!dataSetMlm007->load("Daruni.xml", QCAR::STORAGE_APPRESOURCE))
     {
          LOG("Failed to load data set.");
          return 0;
@@ -360,6 +387,26 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargets_destroyTrackerData(JNIEnv *, jobj
             LOG("Successfully destroyed the data set Tarmac.");
             dataSetMba012 = 0;
         }
+        if (dataSetMlm007 != 0)
+        {
+            if (imageTracker->getActiveDataSet() == dataSetMlm007 &&
+                !imageTracker->deactivateDataSet(dataSetMlm007))
+            {
+                LOG("Failed to destroy the tracking data set Tarmac because the data set "
+                    "could not be deactivated.");
+                return 0;
+            }
+
+            if (!imageTracker->destroyDataSet(dataSetMlm007))
+            {
+                LOG("Failed to destroy the tracking data set Tarmac.");
+                return 0;
+            }
+
+            LOG("Successfully destroyed the data set Tarmac.");
+            dataSetMlm007 = 0;
+        }
+
     return 1;
 }
 
@@ -444,6 +491,9 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargetsRenderer_renderFrame(JNIEnv *, job
 				if (imageTracker->getActiveDataSet() == dataSetMba012 ){
                 	textureIndex = 2;
                 }
+                if (imageTracker->getActiveDataSet() == dataSetMlm007 ){
+                	textureIndex = 3;
+                }
 			}
 			else
 			{
@@ -489,6 +539,8 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargetsRenderer_renderFrame(JNIEnv *, job
 
 			}
 			if (imageTracker->getActiveDataSet() == dataSetMbcr1953lqc ){
+
+			    static float kObjectScale = 3.5f;
 
 				glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0,
 								  (const GLvoid*) &polySurface519_001Vertices[0]);
@@ -545,6 +597,8 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargetsRenderer_renderFrame(JNIEnv *, job
 
 			if (imageTracker->getActiveDataSet() == dataSetMba012 ){
 
+			    static float kObjectScale = 3.5f;
+
             	glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0,
             							(const GLvoid*) &mba012Vertices[0]);
             	glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0,
@@ -588,6 +642,157 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargetsRenderer_renderFrame(JNIEnv *, job
 
             		glDrawElements(GL_TRIANGLES, NUM_MBA012_DESC_OBJECT_INDEX, GL_UNSIGNED_SHORT,
             				(const GLvoid*) &mba012_descIndices[0]);
+
+            	}
+            }
+
+            // Bengala com Assendo MLM007 fechada e aberta
+            if (imageTracker->getActiveDataSet() == dataSetMlm007 ){
+
+                const Texture* const thisTexture = textures[textureIndex];
+                static float kObjectScale = 0.7f;
+
+                // Bengala com assento fechada
+
+                // Posicionamento
+                QCAR::Matrix44F modelViewProjection;
+
+            	SampleUtils::translatePoseMatrix(-25.0f, 0.0f, kObjectScale,
+            					        &modelViewMatrix.data[0]);
+                SampleUtils::rotatePoseMatrix(90.0f, 1.0f, 0.0f, 0.0f,
+                			            &modelViewMatrix.data[0]);
+                SampleUtils::rotatePoseMatrix(180.0f, 0.0f, 1.0f, 0.0f,
+			                            &modelViewMatrix.data[0]);
+            	SampleUtils::scalePoseMatrix(kObjectScale, kObjectScale, kObjectScale,
+            							&modelViewMatrix.data[0]);
+            	SampleUtils::multiplyMatrix(&projectionMatrix.data[0],
+            						    &modelViewMatrix.data[0] ,
+            							&modelViewProjection.data[0]);
+
+            	glUseProgram(shaderProgramID);
+            	glUniformMatrix4fv(modelViewMatrixHandle, 1, GL_FALSE,
+            			                (GLfloat*)&modelViewMatrix.data[0]);
+            	glUniform3f(diffuseMaterialHandle, 1.0f, 1.0f, 1.0f);
+
+
+            	// drawing
+            	glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0,
+            							(const GLvoid*) &mlm007_closedVertices[0]);
+            	glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0,
+            							(const GLvoid*) &mlm007_closedNormals[0]);
+            	glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0,
+            							(const GLvoid*) &mlm007_closedTexCoords[0]);
+            	glEnableVertexAttribArray(vertexHandle);
+            	glEnableVertexAttribArray(normalHandle);
+            	glEnableVertexAttribArray(textureCoordHandle);
+
+
+            	glActiveTexture(GL_TEXTURE0);
+            	glBindTexture(GL_TEXTURE_2D, thisTexture->mTextureID);
+            	glUniform1i(texSampler2DHandle, 0 );
+            	glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE,
+            					(GLfloat*)&modelViewProjection.data[0] );
+
+  				glDrawElements(GL_TRIANGLES, NUM_MLM007_CLOSED_OBJECT_INDEX, GL_UNSIGNED_SHORT,
+            				(const GLvoid*) &mlm007_closedIndices[0]);
+
+
+
+
+
+
+                // Bengala com assento aberta
+
+                // Posicionamento
+                //QCAR::Matrix44F modelViewProjection;
+                kObjectScale = 0.9f;
+
+            	SampleUtils::translatePoseMatrix(-50.0f, 0.0f, kObjectScale,
+            					        &modelViewMatrix.data[0]);
+                SampleUtils::rotatePoseMatrix(0.0f, 1.0f, 0.0f, 0.0f,
+                			            &modelViewMatrix.data[0]);
+                SampleUtils::rotatePoseMatrix(0.0f, 0.0f, 1.0f, 0.0f,
+			                            &modelViewMatrix.data[0]);
+            	SampleUtils::scalePoseMatrix(kObjectScale, kObjectScale, kObjectScale,
+            							&modelViewMatrix.data[0]);
+            	SampleUtils::multiplyMatrix(&projectionMatrix.data[0],
+            						    &modelViewMatrix.data[0] ,
+            							&modelViewProjection.data[0]);
+
+            	glUseProgram(shaderProgramID);
+            	glUniformMatrix4fv(modelViewMatrixHandle, 1, GL_FALSE,
+            			                (GLfloat*)&modelViewMatrix.data[0]);
+            	glUniform3f(diffuseMaterialHandle, 1.0f, 1.0f, 1.0f);
+
+
+            	// drawing
+            	glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0,
+            							(const GLvoid*) &mlm007_openedVertices[0]);
+            	glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0,
+            							(const GLvoid*) &mlm007_openedNormals[0]);
+            	glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0,
+            							(const GLvoid*) &mlm007_openedTexCoords[0]);
+            	glEnableVertexAttribArray(vertexHandle);
+            	glEnableVertexAttribArray(normalHandle);
+            	glEnableVertexAttribArray(textureCoordHandle);
+
+
+            	glActiveTexture(GL_TEXTURE0);
+            	glBindTexture(GL_TEXTURE_2D, thisTexture->mTextureID);
+            	glUniform1i(texSampler2DHandle, 0 );
+            	glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE,
+            					(GLfloat*)&modelViewProjection.data[0] );
+
+  				glDrawElements(GL_TRIANGLES, NUM_MLM007_OPENED_OBJECT_INDEX, GL_UNSIGNED_SHORT,
+            				(const GLvoid*) &mlm007_openedIndices[0]);
+
+
+
+
+            	if ( isDescActivated ){
+                    // Posicionamento
+                    //QCAR::Matrix44F modelViewProjection;
+                    static float kObjectScale_desc = 1.5f;
+
+            	    SampleUtils::translatePoseMatrix(50.0f, 0.0f, kObjectScale_desc,
+            					        &modelViewMatrix.data[0]);
+                    SampleUtils::rotatePoseMatrix(90.0f, 1.0f, 0.0f, 0.0f,
+                			            &modelViewMatrix.data[0]);
+                    SampleUtils::rotatePoseMatrix(180.0f, 0.0f, 1.0f, 0.0f,
+			                            &modelViewMatrix.data[0]);
+            	    SampleUtils::scalePoseMatrix(kObjectScale_desc, kObjectScale_desc, kObjectScale_desc,
+            							&modelViewMatrix.data[0]);
+            	    SampleUtils::multiplyMatrix(&projectionMatrix.data[0],
+            						    &modelViewMatrix.data[0] ,
+            							&modelViewProjection.data[0]);
+
+            	    glUseProgram(shaderProgramID);
+            	    glUniformMatrix4fv(modelViewMatrixHandle, 1, GL_FALSE,
+            			                (GLfloat*)&modelViewMatrix.data[0]);
+            	    glUniform3f(diffuseMaterialHandle, 1.0f, 1.0f, 1.0f);
+
+
+                    // Drawing
+            		const Texture* const thisTexture = textures[1];
+
+            		glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0,
+            					(const GLvoid*) &mlm007_descVertices[0]);
+            		glVertexAttribPointer(normalHandle, 3, GL_FLOAT, GL_FALSE, 0,
+            					(const GLvoid*) &mlm007_descNormals[0]);
+            		glVertexAttribPointer(textureCoordHandle, 2, GL_FLOAT, GL_FALSE, 0,
+            					(const GLvoid*) &mlm007_descTexCoords[0]);
+            		glEnableVertexAttribArray(vertexHandle);
+            		glEnableVertexAttribArray(normalHandle);
+            		glEnableVertexAttribArray(textureCoordHandle);
+
+            		glActiveTexture(GL_TEXTURE0);
+            		glBindTexture(GL_TEXTURE_2D, thisTexture->mTextureID);
+            		glUniform1i(texSampler2DHandle, 0 );
+            		glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE,
+            				(GLfloat*)&modelViewProjection.data[0] );
+
+            		glDrawElements(GL_TRIANGLES, NUM_MLM007_DESC_OBJECT_INDEX, GL_UNSIGNED_SHORT,
+            				(const GLvoid*) &mlm007_descIndices[0]);
 
             	}
             }

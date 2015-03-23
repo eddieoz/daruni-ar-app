@@ -366,6 +366,8 @@ public class ImageTargets extends Activity implements SampleAppMenuInterface
                 getAssets()));
         mTextures.add(Texture.loadTextureFromApk("mba012_texture.png",
                 getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("mlm007_texture.png",
+                getAssets()));
         mTextures.add(Texture.loadTextureFromApk("TextureTeapotBlue.png",
                 getAssets()));
         mTextures.add(Texture.loadTextureFromApk("TextureTeapotRed.png",
@@ -897,6 +899,12 @@ public class ImageTargets extends Activity implements SampleAppMenuInterface
                 startActivity(launchBrowser);
 
             }
+            if ( lastProduct == MLM007_DATASET_ID ){
+                Uri uriUrl = Uri.parse("http://www.terceiraidade.com/bengala-com-assento.html?utm_source=daruni_app&utm_medium=app&utm_content=mlm007&utm_campaign=Daruni%20App");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+
+            }
         	
         	return true;
         }
@@ -913,11 +921,13 @@ public class ImageTargets extends Activity implements SampleAppMenuInterface
     final static int CMD_DATASET_MBCR1953LQC_DATASET = 7;
     final static int CMD_DATASET_TEAPOT_DATASET = 8;
     final static int CMD_DATASET_MBA012_DATASET = 9;
+    final static int CMD_DATASET_MLM007_DATASET = 10;
     
     
     final static int MBCR1953LQC_DATASET_ID = 0;
     final static int TEAPOT_DATASET_ID = 1;
     final static int MBA012_DATASET_ID = 2;
+    final static int MLM007_DATASET_ID = 3;
     
     
     final static int CAMERA_DEFAULT = 0;
@@ -974,6 +984,7 @@ public class ImageTargets extends Activity implements SampleAppMenuInterface
             .addGroup(getString(R.string.menu_datasets), true);
         group.addRadioItem("Cadeira de Rodas MBCR1953LQC", CMD_DATASET_MBCR1953LQC_DATASET, true);
         group.addRadioItem("Cadeira de Banho MBA012", CMD_DATASET_MBA012_DATASET, false);
+        group.addRadioItem("Bengala com Assento MLM007", CMD_DATASET_MLM007_DATASET, false);
         //group.addRadioItem("Pote de Cha", CMD_DATASET_TEAPOT_DATASET, false);
         
         
@@ -1130,6 +1141,10 @@ public class ImageTargets extends Activity implements SampleAppMenuInterface
             case CMD_DATASET_MBA012_DATASET:
                 lastProduct = MBA012_DATASET_ID;
                 switchDatasetAsap(MBA012_DATASET_ID);
+                break;
+            case CMD_DATASET_MLM007_DATASET:
+                lastProduct = MLM007_DATASET_ID;
+                switchDatasetAsap(MLM007_DATASET_ID);
                 break;
             
             case CMD_DATASET_TEAPOT_DATASET:
