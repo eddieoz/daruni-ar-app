@@ -538,9 +538,19 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargetsRenderer_renderFrame(JNIEnv *, job
 							   (const GLvoid*) &teapotIndices[0]);
 
 			}
+
+
+
+
+			/***
+
+                Cadeira de Rodas Alumínio MBCR1953LQC
+
+
+             ***/
 			if (imageTracker->getActiveDataSet() == dataSetMbcr1953lqc ){
 
-			    static float kObjectScale = 3.5f;
+			    static float kObjectScale = 4.0f;
 
 				glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0,
 								  (const GLvoid*) &polySurface519_001Vertices[0]);
@@ -595,9 +605,38 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargetsRenderer_renderFrame(JNIEnv *, job
 
 			}
 
+
+			/***
+
+                Cadeira de Banho com Encosto MBA012
+
+
+             ***/
+
 			if (imageTracker->getActiveDataSet() == dataSetMba012 ){
 
-			    static float kObjectScale = 3.5f;
+			    static float kObjectScale = 0.7f;
+
+                SampleUtils::translatePoseMatrix(0.0f, 0.0f, kObjectScale,
+            					        &modelViewMatrix.data[0]);
+                SampleUtils::rotatePoseMatrix(0.0f, 1.0f, 0.0f, 0.0f,
+                			            &modelViewMatrix.data[0]);
+                SampleUtils::rotatePoseMatrix(0.0f, 0.0f, 1.0f, 0.0f,
+			                            &modelViewMatrix.data[0]);
+            	SampleUtils::scalePoseMatrix(kObjectScale, kObjectScale, kObjectScale,
+            							&modelViewMatrix.data[0]);
+            	SampleUtils::multiplyMatrix(&projectionMatrix.data[0],
+            						    &modelViewMatrix.data[0] ,
+            							&modelViewProjection.data[0]);
+
+            	glUseProgram(shaderProgramID);
+            	glUniformMatrix4fv(modelViewMatrixHandle, 1, GL_FALSE,
+            			                (GLfloat*)&modelViewMatrix.data[0]);
+            	glUniform3f(diffuseMaterialHandle, 1.0f, 1.0f, 1.0f);
+
+
+                // Drawing
+
 
             	glVertexAttribPointer(vertexHandle, 3, GL_FLOAT, GL_FALSE, 0,
             							(const GLvoid*) &mba012Vertices[0]);
@@ -621,6 +660,31 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargetsRenderer_renderFrame(JNIEnv *, job
 
 
             	if ( isDescActivated ){
+
+                    // Posicionamento
+                    //QCAR::Matrix44F modelViewProjection;
+                    static float kObjectScale_desc = 1.4f;
+
+            	    SampleUtils::translatePoseMatrix(-15.0f, 0.0f, kObjectScale_desc,
+            					        &modelViewMatrix.data[0]);
+                    SampleUtils::rotatePoseMatrix(0.0f, 1.0f, 0.0f, 0.0f,
+                			            &modelViewMatrix.data[0]);
+                    SampleUtils::rotatePoseMatrix(0.0f, 0.0f, 1.0f, 0.0f,
+			                            &modelViewMatrix.data[0]);
+            	    SampleUtils::scalePoseMatrix(kObjectScale_desc, kObjectScale_desc, kObjectScale_desc,
+            							&modelViewMatrix.data[0]);
+            	    SampleUtils::multiplyMatrix(&projectionMatrix.data[0],
+            						    &modelViewMatrix.data[0] ,
+            							&modelViewProjection.data[0]);
+
+            	    glUseProgram(shaderProgramID);
+            	    glUniformMatrix4fv(modelViewMatrixHandle, 1, GL_FALSE,
+            			                (GLfloat*)&modelViewMatrix.data[0]);
+            	    glUniform3f(diffuseMaterialHandle, 1.0f, 1.0f, 1.0f);
+
+
+                    // Drawing
+
 
             		const Texture* const thisTexture = textures[1];
 
@@ -646,11 +710,16 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargetsRenderer_renderFrame(JNIEnv *, job
             	}
             }
 
-            // Bengala com Assendo MLM007 fechada e aberta
+            /***
+
+             Bengala com Assendo MLM007 fechada e aberta
+
+
+             ***/
             if (imageTracker->getActiveDataSet() == dataSetMlm007 ){
 
                 const Texture* const thisTexture = textures[textureIndex];
-                static float kObjectScale = 0.7f;
+                static float kObjectScale = 0.6f;
 
                 // Bengala com assento fechada
 
@@ -705,7 +774,7 @@ Java_com_daruni_QCAR_ImageTargets_ImageTargetsRenderer_renderFrame(JNIEnv *, job
 
                 // Posicionamento
                 //QCAR::Matrix44F modelViewProjection;
-                kObjectScale = 0.9f;
+                kObjectScale = 0.8f;
 
             	SampleUtils::translatePoseMatrix(-50.0f, 0.0f, kObjectScale,
             					        &modelViewMatrix.data[0]);
