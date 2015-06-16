@@ -2,11 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/Users/osoriojr/Projects/AndroidstudioProjects/DaruniApp-Beta/app/src/main/Vuforia.jar"
+        jar="/Users/osoriojr/Projects/AndroidstudioProjects/DaruniApp/app/src/main/Vuforia.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="65d210365ebcbcb3c5b93b6db0ca4126f6bcf46d">
-        <dex dex="/Users/osoriojr/Projects/AndroidstudioProjects/DaruniApp-Beta/app/build/intermediates/pre-dexed/release/Vuforia-3176b77b68e860fd5db19f5bf08ccb52df799b26.jar" />
+        <dex dex="/Users/osoriojr/Projects/AndroidstudioProjects/DaruniApp/app/build/intermediates/pre-dexed/debug/Vuforia-5bc5eb3c9271e0442bb062d562c4a38fd89b54a5.jar" />
     </item>
 
 </items>

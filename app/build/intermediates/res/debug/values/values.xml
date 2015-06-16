@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/Users/osoriojr/Projects/AndroidstudioProjects/DaruniApp-Beta/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/Users/osoriojr/Projects/AndroidstudioProjects/DaruniApp/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="black">#000000</color>
     <color name="gray">#575757</color>
@@ -8,7 +8,7 @@
     <color name="light_gray">#D3D3D3</color>
     <color name="semi_transparent_black">#C8000000</color>
     <color name="white">#FFFFFF</color>
-    <!-- From: file:/Users/osoriojr/Projects/AndroidstudioProjects/DaruniApp-Beta/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/Users/osoriojr/Projects/AndroidstudioProjects/DaruniApp/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="menu_entries_sides_padding">10dp</dimen>
     <dimen name="menu_entries_text">20sp</dimen>
@@ -17,10 +17,10 @@
     <dimen name="menu_entries_top_down_radio_padding">7dp</dimen>
     <dimen name="menu_title">22sp</dimen>
     <dimen name="menu_title_padding">14dp</dimen>
-    <!-- From: file:/Users/osoriojr/Projects/AndroidstudioProjects/DaruniApp-Beta/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/osoriojr/Projects/AndroidstudioProjects/DaruniApp/app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="app_description">Catalogo do site TerceiraIdade.com em 3D com Realidade Aumentada</string>
-    <string name="app_name">Daruni-Beta</string>
+    <string name="app_description">Catálogo 3D de produtos do site Terceiraidade.com utilizando realidade aumentada para gerar um holograma com ultra definição</string>
+    <string name="app_name">Daruni Healthcare - Catálogo 3D com Realidade Aumentada</string>
     <string name="button_left">Esquerda</string>
     <string name="button_right">Direita</string>
     <string name="button_start">Iniciar</string>
@@ -43,7 +43,7 @@
     <string name="menu_flash_error_off">Não é possível desligar o flash</string>
     <string name="menu_flash_error_on">Não é possível ligar o flash</string>
     <string name="splash_screen_description">Daruni Splash</string>
-    <!-- From: file:/Users/osoriojr/Projects/AndroidstudioProjects/DaruniApp-Beta/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/Users/osoriojr/Projects/AndroidstudioProjects/DaruniApp/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="SampleAppsTheme" parent="@android:style/Theme.Light.NoTitleBar.Fullscreen">
         <item name="android:windowNoTitle">true</item>

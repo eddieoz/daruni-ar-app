@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Daruni-Beta</string>
-    <string name="app_description">Catalogo do site TerceiraIdade.com em 3D com Realidade Aumentada</string>
+    <string name="app_name">Daruni Healthcare - Catálogo 3D com Realidade Aumentada</string>
+    <string name="app_description">Catálogo 3D de produtos do site Terceiraidade.com utilizando realidade aumentada para gerar um holograma com ultra definição</string>
     <string name="button_start">Iniciar</string>
     
     <string name="menu_back">Sobre</string>
