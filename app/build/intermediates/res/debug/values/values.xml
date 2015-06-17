@@ -42,6 +42,7 @@
     <string name="menu_flash">Flash</string>
     <string name="menu_flash_error_off">Não é possível desligar o flash</string>
     <string name="menu_flash_error_on">Não é possível ligar o flash</string>
+    <string name="menu_txtHelpMenu"><![CDATA[>>> Deslizar: Menu >>> | Duplo-Clique no Holograma: Página do Produto]]></string>
     <string name="splash_screen_description">Daruni Splash</string>
     <!-- From: file:/Users/osoriojr/Projects/AndroidstudioProjects/DaruniApp/app/src/main/res/values/styles.xml -->
     <eat-comment/>

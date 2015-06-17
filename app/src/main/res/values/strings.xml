@@ -28,5 +28,6 @@
 
     <string name="button_right">Direita</string>
     <string name="button_left">Esquerda</string>
-    
+    <string name="menu_txtHelpMenu"><![CDATA[>>> Deslizar: Menu >>> | Duplo-Clique no Holograma: Página do Produto]]></string>
+
 </resources>

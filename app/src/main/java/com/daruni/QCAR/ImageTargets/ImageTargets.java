@@ -784,9 +784,12 @@ public class ImageTargets extends Activity implements SampleAppMenuInterface
         mGlView.setRenderer(mRenderer);
         
         LayoutInflater inflater = LayoutInflater.from(this);
+        //mUILayout = (RelativeLayout) inflater.inflate(R.layout.camera_overlay,
+        //    null, false);
+
         mUILayout = (RelativeLayout) inflater.inflate(R.layout.camera_overlay,
             null, false);
-        
+
         mUILayout.setVisibility(View.VISIBLE);
         mUILayout.setBackgroundColor(Color.BLACK);
         

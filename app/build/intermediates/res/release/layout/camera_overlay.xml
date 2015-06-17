@@ -12,4 +12,19 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true" />
 
+    <TextView
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_txtHelpMenu"
+        android:id="@+id/textHelpMenu"
+        android:textAlignment="center"
+        android:textSize="11sp"
+        android:alpha="0.7"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout><!-- From: file:/Users/osoriojr/Projects/AndroidstudioProjects/DaruniApp/app/src/main/res/layout/camera_overlay.xml -->
