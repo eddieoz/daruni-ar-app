@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.daruni.QCAR.ImageTargets"
-    android:versionCode="207"
+    android:versionCode="209"
     android:versionName="0.9" >
+<!--     <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" /> -->
     <!--
         The application's compatibility with one or more versions of the Android
         platform.
@@ -62,6 +63,7 @@
         android:launchMode="singleTask"
         android:theme="@style/SampleAppsTheme" >
 
+<!--         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" /> -->
         <!--
           NOTE: The values in 'android:configChanges' ensure that Android will 
           not destroy and re-create the activity when the user flips the 
@@ -99,7 +101,63 @@
         <activity
             android:name="com.daruni.QCAR.ImageTargets.ImageTargets"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <intent-filter android:label="@string/filter_title_viewmba012" >
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://example.com/gizmos” -->
+                <data
+                    android:host="www.terceiraidade.com"
+                    android:pathPrefix="/cadeira-de-banho-com-encosto-mobil-saude.html"
+                    android:scheme="http" />
+            </intent-filter>
+            <intent-filter android:label="@string/filter_title_mbcr1953lqc" >
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://example.com/gizmos” -->
+                <data
+                    android:host="www.terceiraidade.com"
+                    android:pathPrefix="/cadeira-de-rodas-aluminio-mbcr1953lqc-mobil-saude.html"
+                    android:scheme="http" />
+            </intent-filter>
+            <intent-filter android:label="@string/filter_title_mlm007" >
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://example.com/gizmos” -->
+                <data
+                    android:host="www.terceiraidade.com"
+                    android:pathPrefix="/bengala-com-assento.html"
+                    android:scheme="http" />
+            </intent-filter>
+            <intent-filter android:label="@string/filter_title_ag6000" >
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://example.com/gizmos” -->
+                <data
+                    android:host="www.terceiraidade.com"
+                    android:pathPrefix="/andador-3x1-em-aluminio-ag-6000.html"
+                    android:scheme="http" />
+            </intent-filter>
+            <intent-filter android:label="@string/filter_title_ag6001" >
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://example.com/gizmos” -->
+                <data
+                    android:host="www.terceiraidade.com"
+                    android:pathPrefix="/andador-articulado-em-aluminio-pop-ag-6001.html"
+                    android:scheme="http" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

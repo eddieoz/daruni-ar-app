@@ -29,5 +29,10 @@
     <string name="button_right">Direita</string>
     <string name="button_left">Esquerda</string>
     <string name="menu_txtHelpMenu"><![CDATA[>>> Deslizar: Menu >>> | Duplo-Clique no Holograma: Página do Produto]]></string>
+    <string name="filter_title_viewmba012">Cadeira de Banho com Encosto - MBA012</string>
+    <string name="filter_title_mbcr1953lqc">Cadeira de Rodas em Alumínio - MBCR1953LQC</string>
+    <string name="filter_title_mlm007">Bengala com Assento - MLM007</string>
+    <string name="filter_title_ag6000">Andador 3em1 - AG6000</string>
+    <string name="filter_title_ag6001">Andador POP - AG6001</string>
 
 </resources>

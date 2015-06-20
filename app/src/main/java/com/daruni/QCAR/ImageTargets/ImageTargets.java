@@ -803,6 +803,60 @@ public class ImageTargets extends Activity implements SampleAppMenuInterface
         // Adds the inflated layout to the view
         addContentView(mUILayout, new LayoutParams(LayoutParams.MATCH_PARENT,
             LayoutParams.MATCH_PARENT));
+
+        Intent intent = getIntent();
+        Uri data = intent.getData();
+
+        if (data != null ) {
+            //AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+
+            if (data.getPath().equals("/cadeira-de-banho-com-encosto-mobil-saude.html"))
+            {
+                lastProduct = MBA012_DATASET_ID;
+                switchDatasetAsap(MBA012_DATASET_ID);
+                //alertDialog.setTitle("MBA012");
+            }
+            if (data.getPath().equals("/cadeira-de-rodas-aluminio-mbcr1953lqc-mobil-saude.html"))
+            {
+                lastProduct = MBCR1953LQC_DATASET_ID;
+                switchDatasetAsap(MBCR1953LQC_DATASET_ID);
+                //alertDialog.setTitle("MBCR1953LQC");
+
+            }
+            if (data.getPath().equals("/bengala-com-assento.html"))
+            {
+                lastProduct = MLM007_DATASET_ID;
+                switchDatasetAsap(MLM007_DATASET_ID);
+                //alertDialog.setTitle("MBCR1953LQC");
+
+            }
+            if (data.getPath().equals("/andador-3x1-em-aluminio-ag-6000.html"))
+            {
+                lastProduct = AG6000_DATASET_ID;
+                switchDatasetAsap(AG6000_DATASET_ID);
+                //alertDialog.setTitle("MBCR1953LQC");
+
+            }
+            if (data.getPath().equals("/andador-articulado-em-aluminio-pop-ag-6001.html"))
+            {
+                lastProduct = AG6001_DATASET_ID;
+                switchDatasetAsap(AG6001_DATASET_ID);
+                //alertDialog.setTitle("MBCR1953LQC");
+
+            }
+
+
+            //alertDialog.setMessage(data.getPath());
+            //alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            //    public void onClick(DialogInterface dialog, int which) {
+            //        // TODO Add your code for the button here.
+            //    }
+            //});
+            // Set the Icon for the Dialog
+            //alertDialog.setIcon(R.drawable.icon);
+            //alertDialog.show();
+
+        }
         
     }
     
@@ -957,7 +1011,7 @@ public class ImageTargets extends Activity implements SampleAppMenuInterface
     final static int CAMERA_BACK = 1;
     final static int CAMERA_FRONT = 2;
     
-    private static int lastProduct = MBCR1953LQC_DATASET_ID;
+    private static int lastProduct = MBA012_DATASET_ID;
     
     
     // This method sets the menu's settings
@@ -1022,7 +1076,7 @@ public class ImageTargets extends Activity implements SampleAppMenuInterface
     {
         
         boolean result = true;
-        
+
         switch (command)
         {
             case CMD_BACK:
